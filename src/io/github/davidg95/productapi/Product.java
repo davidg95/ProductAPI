@@ -40,6 +40,7 @@ public class Product implements Serializable {
      */
     public Product(String name, String make, String code, double price, int stock) {
         this.name = name;
+        this.make = make;
         this.price = price;
         this.stock = stock;
         this.code = code;
@@ -55,6 +56,7 @@ public class Product implements Serializable {
      */
     public Product(String name, String make, double price, int stock) {
         this.name = name;
+        this.make = make;
         this.price = price;
         this.stock = stock;
     }
