@@ -22,6 +22,17 @@ public class ProductList extends ArrayList<Product> {
         super();
     }
 
+    public void addProduct(Product p) throws CodeAlreadyExistsException {
+        for (Product product : this) {
+            if (product.getCode().equals(p.getCode())) {
+                throw new CodeAlreadyExistsException(p.getCode());
+            }
+        }
+        p.generateProductCode();
+        this.add(p);
+        System.out.println(p);
+    }
+
     /**
      * Method to purchase a product by its product code.
      *
@@ -78,7 +89,7 @@ public class ProductList extends ArrayList<Product> {
      * @param code the product code of the product to remove.
      * @throws ProductNotFoundException if the product code was not found.
      */
-    public void removeProduct(String code) throws ProductNotFoundException {
+    public void remove(String code) throws ProductNotFoundException {
         for (int i = 0; i < super.size(); i++) {
             if (super.get(i).getCode().equals(code)) {
                 super.remove(i);
@@ -102,6 +113,22 @@ public class ProductList extends ArrayList<Product> {
             }
         }
         throw new ProductNotFoundException(p.getCode() + " not found");
+    }
+
+    /**
+     * Method to get the stock level of a Product by its product code.
+     *
+     * @param code the code to search for.
+     * @return integer value representing the stock level.
+     * @throws ProductNotFoundException if the product code was not found.
+     */
+    public int getStock(String code) throws ProductNotFoundException {
+        for (Product p : this) {
+            if (p.getCode().equals(code)) {
+                return p.getStock();
+            }
+        }
+        throw new ProductNotFoundException(code);
     }
 
     /**

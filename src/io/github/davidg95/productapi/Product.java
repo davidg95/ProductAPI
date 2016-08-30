@@ -5,14 +5,17 @@
  */
 package io.github.davidg95.productapi;
 
+import java.io.Serializable;
+
 /**
- * Call of type product which can be extended.
+ * Class of type product which can be extended.
  *
  * @author David
  */
-public class Product {
+public class Product implements Serializable {
 
     private String name;
+    private String make;
     private String description;
     private double price;
     private int stock;
@@ -27,29 +30,47 @@ public class Product {
     }
 
     /**
-     * Constructor which takes in name, price and stock level.
+     * Constructor which takes in name, price, code and stock level.
      *
      * @param name the name of the product.
+     * @param make the make of the product.
+     * @param code the product code as a String.
      * @param price the price of the product.
      * @param stock the stock level of the product.
      */
-    public Product(String name, double price, int stock) {
+    public Product(String name, String make, String code, double price, int stock) {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        generateProductCode();
+        this.code = code;
+    }
+    
+    /**
+     * Constructor which takes in name, price and stock level.
+     *
+     * @param name the name of the product.
+     * @param make the make of the product.
+     * @param price the price of the product.
+     * @param stock the stock level of the product.
+     */
+    public Product(String name, String make, double price, int stock) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
     }
 
     /**
      * Constructor which takes in a name, description, price and stock level.
      *
      * @param name the name of the product.
+     * @param make the make of the product.
+     * @param code the product code as a String.
      * @param description a description for the product.
      * @param price the price of the product.
      * @param stock the stock level of the product.
      */
-    public Product(String name, String description, double price, int stock) {
-        this(name, price, stock);
+    public Product(String name, String make, String code, String description, double price, int stock) {
+        this(name, make, code, price, stock);
         this.description = description;
         this.comments = "No Comments";
     }
@@ -59,13 +80,15 @@ public class Product {
      * comments.
      *
      * @param name the name of the product.
+     * @param make the make of the product.
+     * @param code the product code as a String.
      * @param description a description for the product.
      * @param price the price of the product.
      * @param stock the stock level of the product.
      * @param comments any comments about the product.
      */
-    public Product(String name, String description, double price, int stock, String comments) {
-        this(name, description, price, stock);
+    public Product(String name, String make, String code, String description, double price, int stock, String comments) {
+        this(name, make, code, description, price, stock);
         this.comments = comments;
     }
 
@@ -75,6 +98,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
     }
 
     public String getDescription() {
@@ -156,7 +187,7 @@ public class Product {
     public boolean equals(Product p) {
         return this.code.equals(p.getCode());
     }
-    
+
     /**
      * Method to format output for saving to a notepad file.
      *

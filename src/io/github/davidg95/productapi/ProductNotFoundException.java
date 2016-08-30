@@ -12,7 +12,20 @@ package io.github.davidg95.productapi;
  */
 public class ProductNotFoundException extends Exception {
 
-    public ProductNotFoundException(String message) {
-        super(message);
+    private final String code;
+
+    public ProductNotFoundException(String code) {
+        super();
+        this.code = code;
+    }
+
+    @Override
+    public String getMessage() {
+        return code + " not found";
+    }
+
+    @Override
+    public String toString() {
+        return "Exception: " + code + " not found";
     }
 }

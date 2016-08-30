@@ -12,7 +12,20 @@ package io.github.davidg95.productapi;
  */
 public class CodeAlreadyExistsException extends Exception {
 
-    public CodeAlreadyExistsException(String message) {
-        super(message);
+    private final String code;
+
+    public CodeAlreadyExistsException(String code) {
+        super();
+        this.code = code;
+    }
+
+    @Override
+    public String getMessage() {
+        return code + " already exists";
+    }
+
+    @Override
+    public String toString() {
+        return "Exception: " + code + " already exists";
     }
 }

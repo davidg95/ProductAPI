@@ -12,7 +12,20 @@ package io.github.davidg95.productapi;
  */
 public class OutOfStockException extends Exception {
 
-    public OutOfStockException(String message) {
-        super(message);
+    private final String code;
+
+    public OutOfStockException(String code) { 
+        super();
+        this.code = code;
+    }
+
+    @Override
+    public String getMessage() {
+        return code + " is out of stock";
+    }
+
+    @Override
+    public String toString() {
+        return "Exception: " + code + " is out of stock";
     }
 }
